@@ -372,8 +372,17 @@
 <ul>
 <li>行内元素有哪些?块级元素有哪些? 空(void) 元素有哪些?</li>
 </ul>
-<p><code>`</code><br>首先:CSS规范规定,每个元素都有display属性,确定该元素的类型,每个元素都有默认的display值,如div的display默认值为’block’,则为’块级元素’;span默认display属性值为’inline’,是’行内’元素;<br>(1)行内元素:a b span img input select strong<br>(2)块级元素:div ul ol dl li dt dd h1 h2 h3 h4 … p<br>(3)常见的空元素: br hr img input link meta </p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">首先:CSS规范规定,每个元素都有display属性,确定该元素的类型,每个元素都有默认的display值,如div的display默认值为&apos;block&apos;,则为&apos;块级元素&apos;;span默认display属性值为&apos;inline&apos;,是&apos;行内&apos;元素;</span><br><span class="line">(1)行内元素:a b span img input select strong</span><br><span class="line">(2)块级元素:div ul ol dl li dt dd h1 h2 h3 h4 ... p</span><br><span class="line">(3)常见的空元素: br hr img input link meta area base col command embed keygen param source track wbr</span><br><span class="line">不同的浏览器(版本)/HTML4(5)/CSS2等实际略有差异</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页面导入样式时,使用link和@import有什么区别?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)link属于XHTML标签,除了加载CSS外,还能用于定义RSS,定义rel连接属性等作用;而@import是CSS提供的,只能用于加载CSS;</span><br><span class="line">(2)页面被加载的时候,link会同时被加载,而@import引用的CSS会等到页面被加载完再加载</span><br><span class="line">(3)import是CSS2.1提出的,只有IE5以上才能被识别,而link是XHTML标签,无兼容问题;</span><br></pre></td></tr></table></figure>
+<p>-介绍你对浏览器内核的理解?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">主要分成两部分:渲染引擎 (layout engineer或 Rendering Engine)和JS引擎</span><br><span class="line">渲染引擎:负责取得网页的内容(HTML XML 图像等等),整理讯息(例如假如CSS等) , 以及计算网页的显示方式,然后会输出至显示器或打印机. 浏览器的内核的不同对于网页的语法解释会有不同,所以渲染的效果也不相同,所有网页浏览器,电子邮件客户端以及其他需要编辑,显示网络内容的应用程序都需要内核</span><br><span class="line">JS引擎:解析和执行JavaScript来实现网页的动态效果</span><br><span class="line">最开始渲染引擎和JS引擎并没有区分的很明确,后来JS引擎越来越独立,内核就倾向于只指渲染引擎.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常见的浏览器内核有哪些?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Trident内核:IE,MaxThong,TT,The World,360,搜狗浏览器等</span><br><span class="line">Gecko内核:Netscape6及以上版本,FF,MozillaSuite/SeaMonkey等</span><br><span class="line">Presto内核:Opera7及以上 [Opera内核原为: Presto,现为:Blink;]</span><br><span class="line">Webkit内核:Safari,Chrome 等 [Chrome 的Blink(Webkit的分支)]</span><br></pre></td></tr></table></figure>
           
         
       
