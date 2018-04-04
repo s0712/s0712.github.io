@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -263,6 +263,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/IE6经典bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宇哥哥">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到阿呆博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/04/IE6经典bug/" itemprop="url">IE6经典bug</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T10:37:32+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bug填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">Bug填坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.IE6怪异解析之padding与border算入宽高.</p>
+<blockquote>
+<p>原因: 未加文档声明造成非盒模型解析</p>
+<p>解决方法: 加入文档声明&lt;!DOCTYPE html&gt;</p>
+</blockquote>
+<p>2.IE6在块元素,左右浮动,设定margin时造成margin双倍(双边距)</p>
+<blockquote>
+<p>解决方法:display:inline</p>
+</blockquote>
+<p>3.以下三种其实是同一种bug,其实也不算个bug,举个例子:父标签高度20,子标签11,垂直居中,20-11=9,9要分给文字的上面和下面,怎么分?IE6就会与其他的不同,所以,尽量避免.</p>
+<blockquote>
+<p>a.字体大小为奇数之边框高度少1px</p>
+<p> 解决方法:字体大小设置为偶数或者line-height设为偶数</p>
+<p>b.line-height,文本垂直居中差1px,</p>
+<p> 解决办法:padding-top代替line-height居中,或line-height加1减1</p>
+<p>c.与父标签的宽度的奇偶不同的居中造成1px的偏离</p>
+<p>解决方法:如果父标签是奇数宽度,则子标签也用奇数宽度;如果父标签偶数宽度,则子标签也用偶数宽度</p>
+</blockquote>
+<p>4.内部盒模型超出父级时,父级被撑大</p>
+<blockquote>
+<p>解决方法:父标签使用overflow:hidden</p>
+</blockquote>
+<p>5.line-height默认行高bug</p>
+<blockquote>
+<p>解决方法:line-height设值</p>
+</blockquote>
+<p>6.行标签之间会有一小段空白</p>
+<blockquote>
+<p>解决方法:float或结构并排(可读性差,不建议)</p>
+</blockquote>
+<p>7.标签高度无法小于19px</p>
+<blockquote>
+<p>解决方法:overflow:hidden</p>
+</blockquote>
+<p>8.左浮元素margin-bottom失效</p>
+<blockquote>
+<p>解决方法:显示设置高度or 父标签设置padding-bottom代替子标签的margin-bottom or 在放个标签让父标签浮动,子标签margin-bottom,即(margin-bottom与float不同时作用于一个标签)</p>
+</blockquote>
+<p>9.img于块元素中,底边多出空白</p>
+<blockquote>
+<p>解决方法:父级设置overflow:hidden;或img{display:Block;}或_margin:-5px;</p>
+</blockquote>
+<p>10.li之间会有间距</p>
+<blockquote>
+<p>解决方法:float:left;</p>
+</blockquote>
+<p>11.块元素中有文字及有浮动的行元素,行元素换行</p>
+<blockquote>
+<p>解决方法:将行元素置于块元素内的文字前</p>
+</blockquote>
+<p>12.position下的left,bottom错位</p>
+<blockquote>
+<p>解决办法: 为父级(relative层)设置宽高或*zoom:1;</p>
+</blockquote>
+<p>13.子级中有设置position,则父级overflow失效</p>
+<blockquote>
+<p>解决方法:为父级设置position:relative</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/常见前端面试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -292,7 +491,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T16:41:28+08:00">
                 2018-03-28
@@ -313,7 +512,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -459,7 +658,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T11:58:22+08:00">
                 2018-03-27
@@ -480,7 +679,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -644,7 +843,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T16:08:08+08:00">
                 2018-03-26
@@ -665,7 +864,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -813,8 +1012,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -824,8 +1023,8 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Kategorien</span>
               
             </div>
           
@@ -835,8 +1034,8 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Tags</span>
               
             </div>
           
@@ -886,7 +1085,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
