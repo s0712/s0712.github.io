@@ -263,6 +263,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/面向对象的CSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宇哥哥">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到阿呆博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/08/面向对象的CSS/" itemprop="url">面向对象的CSS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-08T17:32:27+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>你曾经听过这样一句话:”内容就是王道么?” 作为一个web开发者,因为工作的缘故经常与内容打交道,这可能是很正常不过了,对于我们已经是过渡使用,但是什么才能把游客吸引到一个网站才是真正的王道~</p>
+<p>从一个web开发者的观点来看,一些人认为速度才是王道, 久而久之,我也开始认同这个观点,近年来许多有经验的前端工程师提供建议”如何才能通过一些最佳实践的方法提高用户体验度呢?”</p>
+<p>不幸的是,众多开发者忽视了CSS的表现(认为他太过简单,是一种机械的动作),而把更多的关注在javascript上或者其他方面.</p>
+<p>–</p>
+<p>在这篇文章里,我将通过面向对象的css概念的介绍, 让你了解一些经常被忽视的地方是如何在改善用户体验和网页可维护性上面发挥作用的</p>
+<h3 id="OOCSS面向对象的css原则"><a href="#OOCSS面向对象的css原则" class="headerlink" title="OOCSS面向对象的css原则"></a>OOCSS面向对象的css原则</h3><p>任何基于面向对象的代码方法,其主要目的都是鼓励代码的复用,OOCSS也是一样,讲究复用,并最终可以更快更高效的书写你的样式,同时方便日后的添加和维护.</p>
+<p>根据oocss在github上的描述,oocss是基于 “ 两个主要原则 “</p>
+<h4 id="1-结构与样式的分离"><a href="#1-结构与样式的分离" class="headerlink" title="1.结构与样式的分离"></a>1.结构与样式的分离</h4><p>几乎页面上的每个元素都有不同的视觉特效(也叫皮肤),他们在不同的环境中重复的在使用,思考一下,一个品牌的logo,他的颜色,细微的渐变或是可见的边框,另一方不是视觉特效(结构)也在不断的重复使用.</p>
+<p>当把这些不同的特性抽象到一个基于类的模块里,他们变得可复用,可以与用到任何元素上,并且具有相同的效果,让我们来看一个代码的前后对比,你就明白我在说些什么了.</p>
+<blockquote>
+<p>在运用oocss的原则前,你的css可能是这个样子的:</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-id">#button</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#widget</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/IE6经典bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1012,7 +1165,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -1034,7 +1187,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">Tags</span>
               
             </div>
