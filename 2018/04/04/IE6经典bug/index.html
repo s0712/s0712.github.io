@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="BUG," />
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="待完善">
-<meta property="og:type" content="website">
-<meta property="og:title" content="欢迎来到阿呆博客">
-<meta property="og:url" content="http://yoursite.com/tags/css布局/index.html">
+<meta name="description" content="1.IE6怪异解析之padding与border算入宽高.  原因: 未加文档声明造成非盒模型解析 解决方法: 加入文档声明&amp;lt;!DOCTYPE html&amp;gt;  2.IE6在块元素,左右浮动,设定margin时造成margin双倍(双边距)  解决方法:display:inline  3.以下三种其实是同一种bug,其实也不算个bug,举个例子:父标签高度20,子标签11,垂直居中,20-">
+<meta name="keywords" content="BUG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IE6经典bug">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/IE6经典bug/index.html">
 <meta property="og:site_name" content="欢迎来到阿呆博客">
-<meta property="og:description" content="待完善">
+<meta property="og:description" content="1.IE6怪异解析之padding与border算入宽高.  原因: 未加文档声明造成非盒模型解析 解决方法: 加入文档声明&amp;lt;!DOCTYPE html&amp;gt;  2.IE6在块元素,左右浮动,设定margin时造成margin双倍(双边距)  解决方法:display:inline  3.以下三种其实是同一种bug,其实也不算个bug,举个例子:父标签高度20,子标签11,垂直居中,20-">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T03:29:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="欢迎来到阿呆博客">
-<meta name="twitter:description" content="待完善">
+<meta name="twitter:title" content="IE6经典bug">
+<meta name="twitter:description" content="1.IE6怪异解析之padding与border算入宽高.  原因: 未加文档声明造成非盒模型解析 解决方法: 加入文档声明&amp;lt;!DOCTYPE html&amp;gt;  2.IE6在块元素,左右浮动,设定margin时造成margin双倍(双边距)  解决方法:display:inline  3.以下三种其实是同一种bug,其实也不算个bug,举个例子:父标签高度20,子标签11,垂直居中,20-">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/css布局/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/04/IE6经典bug/"/>
 
 
 
 
 
-  <title>Tag: css布局 | 欢迎来到阿呆博客</title>
+  <title>IE6经典bug | 欢迎来到阿呆博客</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,54 +249,230 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>css布局<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/IE6经典bug/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宇哥哥">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到阿呆博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/27/浅谈圣杯布局和双飞翼布局/" itemprop="url">
-              
-                <span itemprop="name">浅谈圣杯布局和双飞翼布局</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">IE6经典bug</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-27T11:58:22+08:00"
-              content="2018-03-27" >
-          03-27
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T10:37:32+08:00">
+                2018-04-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bug填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">Bug填坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.IE6怪异解析之padding与border算入宽高.</p>
+<blockquote>
+<p>原因: 未加文档声明造成非盒模型解析</p>
+<p>解决方法: 加入文档声明&lt;!DOCTYPE html&gt;</p>
+</blockquote>
+<p>2.IE6在块元素,左右浮动,设定margin时造成margin双倍(双边距)</p>
+<blockquote>
+<p>解决方法:display:inline</p>
+</blockquote>
+<p>3.以下三种其实是同一种bug,其实也不算个bug,举个例子:父标签高度20,子标签11,垂直居中,20-11=9,9要分给文字的上面和下面,怎么分?IE6就会与其他的不同,所以,尽量避免.</p>
+<blockquote>
+<p>a.字体大小为奇数之边框高度少1px</p>
+<p> 解决方法:字体大小设置为偶数或者line-height设为偶数</p>
+<p>b.line-height,文本垂直居中差1px,</p>
+<p> 解决办法:padding-top代替line-height居中,或line-height加1减1</p>
+<p>c.与父标签的宽度的奇偶不同的居中造成1px的偏离</p>
+<p>解决方法:如果父标签是奇数宽度,则子标签也用奇数宽度;如果父标签偶数宽度,则子标签也用偶数宽度</p>
+</blockquote>
+<p>4.内部盒模型超出父级时,父级被撑大</p>
+<blockquote>
+<p>解决方法:父标签使用overflow:hidden</p>
+</blockquote>
+<p>5.line-height默认行高bug</p>
+<blockquote>
+<p>解决方法:line-height设值</p>
+</blockquote>
+<p>6.行标签之间会有一小段空白</p>
+<blockquote>
+<p>解决方法:float或结构并排(可读性差,不建议)</p>
+</blockquote>
+<p>7.标签高度无法小于19px</p>
+<blockquote>
+<p>解决方法:overflow:hidden</p>
+</blockquote>
+<p>8.左浮元素margin-bottom失效</p>
+<blockquote>
+<p>解决方法:显示设置高度or 父标签设置padding-bottom代替子标签的margin-bottom or 在放个标签让父标签浮动,子标签margin-bottom,即(margin-bottom与float不同时作用于一个标签)</p>
+</blockquote>
+<p>9.img于块元素中,底边多出空白</p>
+<blockquote>
+<p>解决方法:父级设置overflow:hidden;或img{display:Block;}或_margin:-5px;</p>
+</blockquote>
+<p>10.li之间会有间距</p>
+<blockquote>
+<p>解决方法:float:left;</p>
+</blockquote>
+<p>11.块元素中有文字及有浮动的行元素,行元素换行</p>
+<blockquote>
+<p>解决方法:将行元素置于块元素内的文字前</p>
+</blockquote>
+<p>12.position下的left,bottom错位</p>
+<blockquote>
+<p>解决办法: 为父级(relative层)设置宽高或*zoom:1;</p>
+</blockquote>
+<p>13.子级中有设置position,则父级overflow失效</p>
+<blockquote>
+<p>解决方法:为父级设置position:relative</p>
+</blockquote>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BUG/" rel="tag"># BUG</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/28/常见前端面试题/" rel="next" title="常见前端面试题">
+                <i class="fa fa-chevron-left"></i> 常见前端面试题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/08/面向对象的CSS/" rel="prev" title="面向对象的CSS">
+                面向对象的CSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -302,6 +480,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -498,10 +680,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
