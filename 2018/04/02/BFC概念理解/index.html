@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS布局," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="想要理解BFC与IFC,首先要先理解另外两个概念: Box和FC(即 formatting context) Box– CSS布局的基本单位 一个页面是有很多个 Box 组成的,元素的类型和 display 属性决定了这个 Box 的类型,不同类型的Box,会参与不同的 Formatting Context. Block level 的box会参与形成BFC, 比如display的值为block">
+<meta name="keywords" content="CSS布局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BFC概念理解+布局规则+形成方法+用处">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/BFC概念理解/index.html">
+<meta property="og:site_name" content="欢迎来到阿呆博客">
+<meta property="og:description" content="想要理解BFC与IFC,首先要先理解另外两个概念: Box和FC(即 formatting context) Box– CSS布局的基本单位 一个页面是有很多个 Box 组成的,元素的类型和 display 属性决定了这个 Box 的类型,不同类型的Box,会参与不同的 Formatting Context. Block level 的box会参与形成BFC, 比如display的值为block">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-18T09:02:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BFC概念理解+布局规则+形成方法+用处">
+<meta name="twitter:description" content="想要理解BFC与IFC,首先要先理解另外两个概念: Box和FC(即 formatting context) Box– CSS布局的基本单位 一个页面是有很多个 Box 组成的,元素的类型和 display 属性决定了这个 Box 的类型,不同类型的Box,会参与不同的 Formatting Context. Block level 的box会参与形成BFC, 比如display的值为block">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/02/BFC概念理解/"/>
+
+
+
+
+
+  <title>BFC概念理解+布局规则+形成方法+用处 | 欢迎来到阿呆博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">欢迎来到阿呆博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没想好副标题</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/BFC概念理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宇哥哥">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到阿呆博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BFC概念理解+布局规则+形成方法+用处</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T15:21:34+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>想要理解BFC与IFC,首先要先理解另外两个概念: <font color="red">Box</font>和<font color="red">FC</font>(即 formatting context)</p>
+<h3 id="Box"><a href="#Box" class="headerlink" title="Box"></a>Box</h3><p>–</p>
+<p>CSS布局的基本单位</p>
+<p>一个页面是有很多个 Box 组成的,元素的类型和 display 属性决定了这个 Box 的类型,不同类型的Box,会参与不同的 Formatting Context.</p>
+<p><font color="red">Block level</font> 的box会参与形成BFC, 比如<font color="red">display</font>的值为<font color="red">block , list-item ,table </font>的元素.</p>
+<p><font color="red">Inline level</font>的box会参与形成IFC, 比如<font color="red">display</font>的值为<font color="red">inline,inline-table,inline-block</font>的元素.</p>
+<h3 id="FC-Formatting-Context"><a href="#FC-Formatting-Context" class="headerlink" title="FC (Formatting Context)"></a>FC (Formatting Context)</h3><p>–</p>
+<p>它是W3C CSS2.1 规范中的一个概念,定义的事页面中的一块渲染区域,并有一套渲染规则,它决定了其子元素将如何定位,以及其他元素的关系,和相互作用.</p>
+<p>常用的<font color="red"> Formatting Context</font>有:<font color="red"> Block Formatting Context </font>(BFC | 块级格式化上下文) 和 <font color="red">Inline Formatting Context</font> (IFC | 行内格式化上下文).</p>
+<p>下面就来介绍下 IFC 和 BFC的布局规则.</p>
+<p>–</p>
+<h3 id="IFC布局规则"><a href="#IFC布局规则" class="headerlink" title="IFC布局规则"></a>IFC布局规则</h3><p>–</p>
+<blockquote>
+<p>在行内格式化上下文中,框(boxes)一个接一个的水平排列, 起点是包含块的顶部,水平方向上的 margin ,border 和 padding 在框之间得到保留, 框在垂直方向上可以以不同的方式对齐: 它们的顶部或是底部对齐,或根据其中文字的基线对齐. 包含那些框的长方形区域,会形成一行,叫做行框.</p>
+</blockquote>
+<p>–</p>
+<h3 id="BFC布局规则"><a href="#BFC布局规则" class="headerlink" title="BFC布局规则"></a>BFC布局规则</h3><p>–</p>
+<p>根据W3C整理成中文</p>
+<blockquote>
+<ol>
+<li>内部的Box会在垂直方向,一个接一个的放置.</li>
+<li>Box垂直方向的距离由margin 决定,属于同一个BFC的两个相邻的Box 的margin 会发生重叠</li>
+<li>每个元素的左外边缘(margin-left),与包含块的左边( contain box left ) 相接触 (对于从左往右的格式化,否则相反) 即使存在浮动也是如此.除非这个元素自己形成了一个新的BFC.</li>
+<li>BFC的区域不会与float box 重叠</li>
+<li>BFC就是页面上的一个隔离的独立容器,容器里面的子元素不会影响到外面的元素.反之也如此.</li>
+<li>计算BFC的高度时,浮动元素也参与计算.</li>
+</ol>
+</blockquote>
+<h2 id="怎样形成一个BFC"><a href="#怎样形成一个BFC" class="headerlink" title="怎样形成一个BFC?"></a>怎样形成一个BFC?</h2><blockquote>
+<ul>
+<li>根元素</li>
+<li>float 属性不为 none</li>
+<li>position 为absolute 或fixed</li>
+<li>display 为inline-block table-cell,table-caption, flex或inline-flex</li>
+<li>overflow 不为visible</li>
+</ul>
+</blockquote>
+<p>那么相信到这儿,你肯定会有个疑问: 为什么display:inline-block; 的元素是 inline level 的元素,参与形成IFC, 却能创建BFC?</p>
+<p>后来个人理解,觉得答案可能是这样的,:inline-block 的元素的内部是一个BFC, 但是它本身可以和其他inline 元素一起形成IFC.</p>
+<h2 id="BFC用处"><a href="#BFC用处" class="headerlink" title="BFC用处"></a>BFC用处</h2><h4 id="1-清除浮动"><a href="#1-清除浮动" class="headerlink" title="1.清除浮动"></a>1.清除浮动</h4><p>相信大家都有遇到过由于子元素都是浮动的,受浮动影响,父元素的高度 “塌陷了”.将下面的代码拷贝 即可显示塌陷</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CSS</span><br><span class="line">   .container &#123;</span><br><span class="line">        border:1px solid blue;</span><br><span class="line">    &#125;</span><br><span class="line">    .aside &#123;</span><br><span class="line">        width: 80px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        float: left;</span><br><span class="line">        background: pink;</span><br><span class="line">    &#125;</span><br><span class="line">    .main &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 70px;</span><br><span class="line">        background: yellow;</span><br><span class="line">        float: left;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">HTML</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;aside&quot;&gt;aside&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>塌陷效果如网页显示,解决办法是:为 .containe加上 overflow:hidden; 使其形成BFC, 根据BFC规则第六条, 计算高度时,就会计算float的元素的高度,达到清除浮动影响的效果.</p>
+<h4 id="2-布局-自适应两栏布局"><a href="#2-布局-自适应两栏布局" class="headerlink" title="2.布局: 自适应两栏布局"></a>2.布局: 自适应两栏布局</h4><p>有一种布局问题,浮动的元素会遮挡其他兄弟元素,将下面代码拷贝,即可实现 “浮动元素遮挡”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CSS</span><br><span class="line"> .container &#123;</span><br><span class="line">    	width: 300px;</span><br><span class="line">        border:1px solid blue;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    .aside &#123;</span><br><span class="line">        width: 80px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        float: left;</span><br><span class="line">        background: pink;</span><br><span class="line">    &#125;</span><br><span class="line">    .main &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 70px;</span><br><span class="line">        background: yellow;</span><br><span class="line">    &#125;</span><br><span class="line"> HTML</span><br><span class="line"> &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;aside&quot;&gt;aside&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;</span><br><span class="line">   &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>在网页上即可看到车祸现场效果,解决办法: 为 .main 加上 overflow:hidden; 触发main 元素的BFC, 根据规则的第四条,第五条,BFC 的区域是独立的,不会与页面的其他元素相互影响, 且不会与float 元素重叠, 因此就可以形成两列的自适应布局.</p>
+<h4 id="3-防止垂直margin合并"><a href="#3-防止垂直margin合并" class="headerlink" title="3.防止垂直margin合并"></a>3.防止垂直margin合并</h4><p>应该在布局的时候都有遇到过这样的问题,两个相邻的元素的在垂直方向上的margin值被合并了,如下面代码实现显示,本来 hehe,haha 之间的垂直外边距和应该是200px,但现在只显示了100px,那么为什么呢?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CSS</span><br><span class="line">p&#123;</span><br><span class="line">		color:#f55;</span><br><span class="line">		background: #fcc;</span><br><span class="line">		width: 200px;</span><br><span class="line">		line-height: 100px;</span><br><span class="line">		text-align: center;</span><br><span class="line">		margin:100px;</span><br><span class="line">		border:1px solid red;</span><br><span class="line">	&#125;</span><br><span class="line">HTML</span><br><span class="line">&lt;p&gt;haha&lt;/p&gt;</span><br><span class="line">&lt;p&gt;hehe&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>那么上面的问题是如何产生的呢?因为他们的外边距相遇发生了合并~</p>
+<p>怎么解决? 为其中的一个元素的外面包裹一层父元素, 并为这个父元素设置overflow:hidden; 使其形成BFC, 因为BFC内部是一个独立的容器, 所以不会与外部相互影响, 可以防止margin 合并.代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTMl</span><br><span class="line">&lt;p&gt;haha&lt;/p&gt;</span><br><span class="line">&lt;div class=&quot;wrap&quot;&gt;&lt;p&gt;hehe&lt;/p&gt;&lt;/div&gt;</span><br><span class="line">CSS</span><br><span class="line">.wrap&#123;overflow:hidden&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么加了overflow:hidden就可以把边框加上?<br>因为生成了BFC, 生成BFC后,会让内部元素参与计算,一旦父元素生成了BFC规则, 那么其所有子元素都会参与计算</p>
+<p>以上就是BFC布局的解释及场景.👏</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS布局/" rel="tag"># CSS布局</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/28/常见前端面试题/" rel="next" title="常见前端面试题">
+                <i class="fa fa-chevron-left"></i> 常见前端面试题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/IE6经典bug/" rel="prev" title="IE6经典bug">
+                IE6经典bug <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="宇哥哥" />
+          <p class="site-author-name" itemprop="name">宇哥哥</p>
+           
+              <p class="site-description motion-element" itemprop="description">待完善</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Box"><span class="nav-number">1.</span> <span class="nav-text">Box</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FC-Formatting-Context"><span class="nav-number">2.</span> <span class="nav-text">FC (Formatting Context)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IFC布局规则"><span class="nav-number">3.</span> <span class="nav-text">IFC布局规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC布局规则"><span class="nav-number">4.</span> <span class="nav-text">BFC布局规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样形成一个BFC"><span class="nav-number"></span> <span class="nav-text">怎样形成一个BFC?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC用处"><span class="nav-number"></span> <span class="nav-text">BFC用处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-清除浮动"><span class="nav-number">0.1.</span> <span class="nav-text">1.清除浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-布局-自适应两栏布局"><span class="nav-number">0.2.</span> <span class="nav-text">2.布局: 自适应两栏布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-防止垂直margin合并"><span class="nav-number">0.3.</span> <span class="nav-text">3.防止垂直margin合并</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">宇哥哥</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
