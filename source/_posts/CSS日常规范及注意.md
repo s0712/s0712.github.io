@@ -2,7 +2,7 @@
 title: CSS日常规范及注意
 date: 2018-04-04 14:09:31
 tags: CSS规范,弹性盒模型,移动端px与rem
-categories:CSS
+categories: CSS
 ---
 
 ### 基于移动端的PX与REM转换兼容方案

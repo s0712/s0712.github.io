@@ -1,8 +1,8 @@
 ---
 title: BFC概念理解+布局规则+形成方法+用处
 date: 2018-04-02 15:21:34
-tags:CSS布局
-categories:CSS
+tags: CSS布局
+categories: CSS
 ---
 
 想要理解BFC与IFC,首先要先理解另外两个概念: <font color=red>Box</font>和<font color=red>FC</font>(即 formatting context)
